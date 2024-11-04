@@ -70,7 +70,7 @@ export class MainContract implements Contract {
   async sendDeposit(provider: ContractProvider, sender: Sender, value: bigint) {
     const msg_body = beginCell().storeUint(2, 32).endCell();
 
-    await provider.internal(sender, {
+    return await provider.internal(sender, {
       value,
       sendMode: SendMode.PAY_GAS_SEPARATELY,
       body: msg_body,

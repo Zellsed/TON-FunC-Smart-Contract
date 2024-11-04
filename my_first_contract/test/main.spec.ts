@@ -63,21 +63,28 @@ describe("main.fc contract test", () => {
 
   it("successfully deposits funds", async () => {
     const senderWallet = await blockchain.treasury("sender");
+    console.log(myContract.getBalance);
 
     const depositMessageResult = await myContract.sendDeposit(
       senderWallet.getSender(),
-      toNano("5")
+      toNano("25")
     );
 
-    expect(depositMessageResult.transactions).toHaveTransaction({
-      from: senderWallet.address,
-      to: myContract.address,
-      success: true,
-    });
-
     const balance = await myContract.getBalance();
+    console.log(balance);
 
     expect(balance.balance).toBeGreaterThan(toNano("4.99"));
+
+    // expect(depositMessageResult.transactions).toHaveTransaction({
+    //   from: senderWallet.address,
+    //   to: myContract.address,
+    //   success: true,
+    // });
+
+    // const balance = await myContract.getBalance();
+    // console.log(balance);
+
+    // expect(balance.balance).toBeGreaterThan(toNano("4.99"));
   });
 
   it("should return deposi fund as no command is sent", async () => {

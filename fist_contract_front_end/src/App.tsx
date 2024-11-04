@@ -57,7 +57,7 @@ function App() {
           {connected && (
             <a
               onClick={() => {
-                sendDeposit();
+                sendDeposit().then((res) => console.log("res", res));
               }}
             >
               Request deposit of 1 TON
